@@ -2,6 +2,9 @@
 
 const Discord = require("discord.js");
 const {prefix, token} = require("./config.json");
+const {Menu} = require('discord.js-menu');
+
+
 const ytsr = require('ytsr');
 
 
@@ -24,18 +27,41 @@ client.on('message', async (msg) => {
     if ( command === "search" ) {
         const query = args.join(" ");
         searchEmbed.setDescription = "Searching";
-        msg.channel.send(searchEmbed);
+        var embedMessage = await msg.channel.send(searchEmbed);
 
 
         ytDlSearch(query).then((result) => { 
             if (result == null) {
-                console.log(`No Result for ${query}`);
+                resultEmbed = new Discord.MessageEmbed()
+                    .setColor("#FF0000")
+                    .setTitle("Failed")
+                    .setTimestamp()
+                    .setFooter('This Bot was created by AdrianH#5605');
             } else { 
-                searchEmbed
-                    .setAuthor = result[0].author.name
-                    .setDescription = result[0].description
-                    .setThumbnail = result[0].thumbnails[0].url;
-                // msg.edit(searchEmbed); I need to change this.
+            arrofEmbeds = [];
+            for ( let x in result ){
+                let msgEmbed = {
+                    name: x,
+                    content: new Discord.MessageEmbed({
+                        color: "#00FF00",
+                        title: result[x].title,
+                        description: result[x].description,
+                        author: result[x].author.name,
+                        url: result[x].url,
+                        footer: "This Bot was created by AdrianH#5605"
+                    }).setImage(result[x].thumbnails[0].url),
+                    reactions: {
+                        '⬅': 'previous',
+                        '➡': 'next',
+                        '⛔': 'stop',
+                        '1️⃣': 'first'
+                    }
+                };
+                arrofEmbeds.push(msgEmbed);
+            }
+            let resultMenu = new Menu(msg.channel, msg.author.id, arrofEmbeds);
+                embedMessage.delete();
+                resultMenu.start();
                 
             }        
         });
@@ -47,11 +73,10 @@ client.on('message', async (msg) => {
 const ytDlSearch = async (query) => {
     let x = await ytsr(`"Hybrid Calisthenics" ${query}`).then((result) => {
         let results = [];
-        console.log(result);
         for ( let item of result.items) {
             if (item.type == "video" && item.author.url == 'https://www.youtube.com/channel/UCeJFgNahi--FKs0oJyeRDEw'){
             results.push(item);
-        }
+            }
         }
         return results;
     });
@@ -61,7 +86,7 @@ const ytDlSearch = async (query) => {
 
 let searchEmbed = new Discord.MessageEmbed()
     .setColor("#7851A9")
-    .setTitle("Search Results")
+    .setTitle("Searching...")
     .setFooter('This Bot was created by AdrianH#5605');
 
 
