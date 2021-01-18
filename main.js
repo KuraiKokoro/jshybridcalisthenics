@@ -99,4 +99,6 @@ let searchEmbed = new Discord.MessageEmbed()
 
 client.login(token);
 
-
+setInterval(() => {
+    console.log("Worker still running.");
+  }, 1000);
