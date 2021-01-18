@@ -3,12 +3,8 @@
 require('dotenv').config();
 token = process.env.token;
 prefix = process.env.prefix;
-const http = require('http');
 
-http.createServer((req, res) => {
-    res.write("Hybrid Calisthenics Bot is running");
-    res.end();
-}).listen(80)
+
 
 const Discord = require("discord.js");
 const {Menu} = require('discord.js-menu');
