@@ -119,6 +119,5 @@ setInterval(() => {
           console.error(err.message);
           return;
         }
-        console.log('Configuration saved successfully.');
       });
   }, 1000);
