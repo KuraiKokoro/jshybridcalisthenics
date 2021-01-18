@@ -101,5 +101,5 @@ let searchEmbed = new Discord.MessageEmbed()
 client.login(token);
 
 setInterval(() => {
-    console.log("Worker still running.");
+    console.log("Bot still running.");
   }, 1000);
