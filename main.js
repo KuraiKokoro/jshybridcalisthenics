@@ -8,7 +8,7 @@ const http = require('http');
 http.createServer((req, res) => {
     res.write("Hybrid Calisthenics Bot is running");
     res.end();
-}).listen(80)
+}).listen(80);
 
 const Discord = require("discord.js");
 const {Menu} = require('discord.js-menu');
@@ -36,7 +36,7 @@ client.on('message', async (msg) => {
     if ( command === "search" ) {
         const query = args.join(" ");
         searchEmbed.setDescription = "Searching";
-        var embedMessage = await msg.channel.send(searchEmbed);
+        let embedMessage = await msg.channel.send(searchEmbed);
 
 
         ytDlSearch(query).then((result) => { 
@@ -47,7 +47,7 @@ client.on('message', async (msg) => {
                     .setTimestamp()
                     .setFooter('This Bot was created by AdrianH#5605');
             } else { 
-            arrofEmbeds = [];
+            let arrofEmbeds = [];
             for ( let x in result ){
                 let msgEmbed = {
                     name: x,
