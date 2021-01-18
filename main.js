@@ -53,7 +53,7 @@ client.on('message', async (msg) => {
                         description: result[x].description,
                         author: result[x].author.name,
                         url: result[x].url,
-                        footer: "This Bot was created by AdrianH#5605",
+                        footer: { text: "Bot Created by AdrianH#5665" },
                         fields: { name: "Uploaded", value: result[x].uploadedAt }
                     }).setImage(result[x].thumbnails[0].url),
                     
@@ -94,7 +94,7 @@ const ytDlSearch = async (query) => {
 let searchEmbed = new Discord.MessageEmbed()
     .setColor("#7851A9")
     .setTitle("Searching...")
-    .setFooter('This Bot was created by AdrianH#5605');
+    .setFooter('Bot created by AdrianH#5605');
 
 
 
