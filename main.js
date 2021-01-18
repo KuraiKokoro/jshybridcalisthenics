@@ -54,7 +54,7 @@ client.on('message', async (msg) => {
                         author: result[x].author.name,
                         url: result[x].url,
                         footer: "This Bot was created by AdrianH#5605",
-                        fields: { name: "Uploaded", value: result[x].uploadedAt}
+                        fields: { name: "Uploaded", value: result[x].uploadedAt }
                     }).setImage(result[x].thumbnails[0].url),
                     
                     reactions: {
