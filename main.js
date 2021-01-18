@@ -1,17 +1,19 @@
 /* jshint esversion: 8 */
 
 require('dotenv').config();
+const Discord = require("discord.js");
+const {Menu} = require('discord.js-menu');
+const nconf = require('nconf');
+
+
 token = process.env.token;
 prefix = process.env.prefix;
 
 
-
-const Discord = require("discord.js");
-const {Menu} = require('discord.js-menu');
-
-
 const ytsr = require('ytsr');
 
+nconf.use('file', { file: './config.json'});
+nconf.load();
 
 const client = new Discord.Client();
 
@@ -24,11 +26,19 @@ client.on('message', async (msg) => {
 
     const args = msg.content.slice(prefix.length).trim().split(/ +/);
     const command = args.shift().toLowerCase();
-
+    
+    // check ping
     if ( command === "ping" ) {
-        msg.channel.send("Pong...");
+        let pingEmbed = new Discord.MessageEmbed({
+            title: "Ping Stats",
+            fields: [{name: "API Ping", value: `${Math.round(client.ws.ping)}ms` }]
+        }
+        );
+        console.log(Date.now, msg.createdTimestamp)
+        msg.channel.send(pingEmbed);
     }
 
+    // search videos command
     if ( command === "search" ) {
         const query = args.join(" ");
         searchEmbed.setDescription = "Searching";
@@ -41,7 +51,7 @@ client.on('message', async (msg) => {
                     .setColor("#FF0000")
                     .setTitle("Failed")
                     .setTimestamp()
-                    .setFooter('This Bot was created by AdrianH#5605');
+                    .setFooter('Bot created by AdrianH#5605');
             } else { 
             arrofEmbeds = [];
             for ( let x in result ){
@@ -53,7 +63,7 @@ client.on('message', async (msg) => {
                         description: result[x].description,
                         author: result[x].author.name,
                         url: result[x].url,
-                        footer: { text: "Bot Created by AdrianH#5665" },
+                        footer: { text: "Bot created by AdrianH#5665" },
                         fields: { name: "Uploaded", value: result[x].uploadedAt }
                     }).setImage(result[x].thumbnails[0].url),
                     
@@ -72,6 +82,10 @@ client.on('message', async (msg) => {
                 
             }        
         });
+    }
+    // set announcement channel
+    if ( command === "setann" && msg.member.guild.me.hasPermission('MANAGE_CHANNELS')){
+        
     }
 
 });
