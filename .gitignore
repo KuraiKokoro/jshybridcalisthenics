@@ -1,3 +1,4 @@
 .token.js
 config.json
 node_modules
+.env
