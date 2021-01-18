@@ -3,12 +3,15 @@
 require('dotenv').config();
 token = process.env.token;
 prefix = process.env.prefix;
-const http = require('http');
 
+<<<<<<< HEAD
 http.createServer((req, res) => {
     res.write("Hybrid Calisthenics Bot is running");
     res.end();
 }).listen(80);
+=======
+
+>>>>>>> parent of 23fb866... create webserver
 
 const Discord = require("discord.js");
 const {Menu} = require('discord.js-menu');
