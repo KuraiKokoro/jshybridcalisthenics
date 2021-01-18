@@ -32,9 +32,7 @@ client.on('message', async (msg) => {
         let pingEmbed = new Discord.MessageEmbed({
             title: "Ping Stats",
             fields: [{name: "API Ping", value: `${Math.round(client.ws.ping)}ms` }]
-        }
-        );
-        console.log(Date.now, msg.createdTimestamp)
+        });
         msg.channel.send(pingEmbed);
     }
 
@@ -84,8 +82,8 @@ client.on('message', async (msg) => {
         });
     }
     // set announcement channel
-    if ( command === "setann" && msg.member.guild.me.hasPermission('MANAGE_CHANNELS')){
-        
+    if ( command === "setann" ){
+        nconf.set('announcementChannel', msg.channel.id );
     }
 
 });
@@ -116,4 +114,11 @@ client.login(token);
 
 setInterval(() => {
     console.log("Bot still running.");
+    nconf.save(function (err) {
+        if (err) {
+          console.error(err.message);
+          return;
+        }
+        console.log('Configuration saved successfully.');
+      });
   }, 1000);
