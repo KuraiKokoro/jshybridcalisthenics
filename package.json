@@ -5,13 +5,14 @@
     "discord.js": "^12.5.1",
     "discord.js-menu": "^2.3.1",
     "dotenv": "^8.2.0",
+    "nconf": "^0.11.1",
     "ytsr": "^3.2.1"
   },
   "engines": {
     "node": "12.x",
     "npm": "*"
   },
-  "scripts":{
+  "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node main.js"
   }
