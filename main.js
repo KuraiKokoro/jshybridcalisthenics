@@ -1,7 +1,12 @@
 /* jshint esversion: 8 */
 
+require('dotenv').config();
+token = process.env.token;
+prefix = process.env.prefix;
+
+
+
 const Discord = require("discord.js");
-const {prefix, token} = require("./config.json");
 const {Menu} = require('discord.js-menu');
 
 
@@ -50,6 +55,7 @@ client.on('message', async (msg) => {
                         url: result[x].url,
                         footer: "This Bot was created by AdrianH#5605"
                     }).setImage(result[x].thumbnails[0].url),
+                    
                     reactions: {
                         '⬅': 'previous',
                         '➡': 'next',
