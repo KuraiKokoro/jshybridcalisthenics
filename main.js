@@ -23,11 +23,20 @@ client.on('message', async (msg) => {
 
     if ( command === "search" ) {
         const query = args.join(" ");
+        searchEmbed.setDescription = "Searching";
+        msg.channel.send(searchEmbed);
+
+
         ytDlSearch(query).then((result) => { 
             if (result == null) {
                 console.log(`No Result for ${query}`);
-            } else { msg.channel.send(result);
-            
+            } else { 
+                searchEmbed
+                    .setAuthor = result[0].author.name
+                    .setDescription = result[0].description
+                    .setThumbnail = result[0].thumbnails[0].url;
+                // msg.edit(searchEmbed); I need to change this.
+                
             }        
         });
     }
@@ -53,7 +62,7 @@ const ytDlSearch = async (query) => {
 let searchEmbed = new Discord.MessageEmbed()
     .setColor("#7851A9")
     .setTitle("Search Results")
-    .setFooter('Created by AdrianH#5605');
+    .setFooter('This Bot was created by AdrianH#5605');
 
 
 
