@@ -23,25 +23,40 @@ client.on('message', async (msg) => {
 
     if ( command === "search" ) {
         const query = args.join(" ");
-        msg.channel.send(await ytDlSearch(query));
+        ytDlSearch(query).then((result) => { 
+            if (result == null) {
+                console.log(`No Result for ${query}`);
+            } else { msg.channel.send(result);
+            
+            }        
+        });
     }
 
 });
 
 
 const ytDlSearch = async (query) => {
-    let results = [];
-    ytsr(`"Hybrid Calisthenics" ${query}`).then((result) => {
+    let x = await ytsr(`"Hybrid Calisthenics" ${query}`).then((result) => {
+        let results = [];
+        console.log(result);
         for ( let item of result.items) {
             if (item.type == "video" && item.author.url == 'https://www.youtube.com/channel/UCeJFgNahi--FKs0oJyeRDEw'){
-            results.push(item);    
+            results.push(item);
         }
         }
-    }).then(() => {
         return results;
     });
+    return x;
 };
+
+
+let searchEmbed = new Discord.MessageEmbed()
+    .setColor("#7851A9")
+    .setTitle("Search Results")
+    .setFooter('Created by AdrianH#5605');
 
 
 
 client.login(token);
+
+
