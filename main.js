@@ -135,6 +135,10 @@ client.on('message', async (msg) => {
         msg.channel.send(helpEmbed);
     }
 
+    if ( command === "sephiroth" ){
+        msg.channel.send("https://youtu.be/-5sLN2h2_9E")
+    }
+
 });
 
 const IGnewPost = (post) => {
