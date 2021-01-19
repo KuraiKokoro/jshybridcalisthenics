@@ -185,9 +185,9 @@ const socialsEmbed = new Discord.MessageEmbed({
 
 const helpEmbed = new Discord.MessageEmbed({
     fields:[
-        {name: "search", value: "Search Hampton's Youtube Channel"},
-        {name: "socials", value: "Display list of all of Hampton's Social Media"},
-        {name: "instagram", value: "Get the latest post from Hampton's instagram."}
+        {name: `${prefix}search`, value: "Search Hampton's Youtube Channel"},
+        {name: `${prefix}socials`, value: "Display list of all of Hampton's Social Media"},
+        {name: `${prefix}instagram`, value: "Get the latest post from Hampton's instagram."}
     ]
 });
 
