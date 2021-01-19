@@ -4,21 +4,47 @@ require('dotenv').config();
 const Discord = require("discord.js");
 const {Menu} = require('discord.js-menu');
 const nconf = require('nconf');
-
-
+const ytsr = require('ytsr');
+const ig = require('scraper-instagram');
+// Load Token / Prefix from .env file
 token = process.env.token;
 prefix = process.env.prefix;
-
-
-const ytsr = require('ytsr');
-
+igToken = process.env.ig_token;
+// Load Config.json file
 nconf.use('file', { file: './config.json'});
 nconf.load();
 
+const igClient = new ig();
+let latestPost;
+
+
+
+
+
+
 const client = new Discord.Client();
 
-client.on('ready', () => {
+client.on('ready', async () => {
     console.log(`Logged in as ${client.user.tag}!`);
+    
+    // Get Latest instagram post from Profile
+    let lastIGPost = await igClient.getProfile("hybrid.calisthenics").then((result) => {
+        return result.lastPosts[0];
+    });
+
+    // Get latest instagram post from Profil
+    setInterval(async () => {
+        let newPost = await igClient.getProfile("rognordic").then((result) => {
+            return result.lastPosts[0];
+        });
+        if (newPost.shortcode != lastIGPost.shortcode){
+            lastIGPost = newPost;
+            IGnewPost(newPost);
+        }
+
+
+
+    }, 18000);
 });
 
 client.on('message', async (msg) => {
@@ -43,7 +69,7 @@ client.on('message', async (msg) => {
         var embedMessage = await msg.channel.send(searchEmbed);
 
 
-        ytDlSearch(query).then((result) => { 
+        ytSearch(query).then((result) => { 
             if (result == null) {
                 resultEmbed = new Discord.MessageEmbed()
                     .setColor("#FF0000")
@@ -83,13 +109,39 @@ client.on('message', async (msg) => {
     }
     // set announcement channel
     if ( command === "setann" ){
-        nconf.set('announcementChannel', msg.channel.id );
+        nconf.set('announcementChannel', msg.channel.id);
+    }
+
+    if ( command === "instagram" ){
+        igClient.getProfile("hybrid.calisthenics").then((profile) => {
+                console.log(profile);
+                igEmbed = new Discord.MessageEmbed({
+                    title: "Hybrid.Calisthenics",
+                    description: profile.lastPosts[0].caption,
+                    url: `http://instagram.com/p/${profile.lastPosts[0].shortcode}`
+                }).setImage(profile.lastPosts[0].thumbnail);
+
+                msg.channel.send(igEmbed);
+            }
+        ).catch((err) => console.log(err));
+        
     }
 
 });
 
+const IGnewPost = (post) => {
+    announcementChannel = client.channels.cache.get(nconf.get('announcementChannel'));
+    const newPostEmbed = new Discord.MessageEmbed({
+        title: "View post on Instagram",
+        description: post.caption,
+        url: `http://instagram.com/p/${post.shortcode}`
+    }).setImage(post.thumbnail);
 
-const ytDlSearch = async (query) => {
+    announcementChannel.send(newPostEmbed);
+};
+
+
+const ytSearch = async (query) => {
     let x = await ytsr(`"Hybrid Calisthenics" ${query}`).then((result) => {
         let results = [];
         for ( let item of result.items) {
@@ -103,14 +155,23 @@ const ytDlSearch = async (query) => {
 };
 
 
+
+
+
 let searchEmbed = new Discord.MessageEmbed()
     .setColor("#7851A9")
     .setTitle("Searching...")
     .setFooter('Bot created by AdrianH#5605');
 
 
+(async () => {
+    console.log('Starting Bot...');
+    igClient.authBySessionId(igToken)
+        .then(account => console.log(account))
+        .catch(err => console.log(err));
+    client.login(token);
 
-client.login(token);
+}) ();
 
 setInterval(() => {
     console.log("Bot still running.");
