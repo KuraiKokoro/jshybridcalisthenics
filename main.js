@@ -34,7 +34,7 @@ client.on('ready', async () => {
 
     // Get latest instagram post from Profil
     setInterval(async () => {
-        let newPost = await igClient.getProfile("rognordic").then((result) => {
+        let newPost = await igClient.getProfile("hybrid.calisthenics").then((result) => {
             return result.lastPosts[0];
         });
         if (newPost.shortcode != lastIGPost.shortcode){
