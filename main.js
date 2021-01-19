@@ -32,7 +32,7 @@ client.on('ready', async () => {
         return result.lastPosts[0];
     });
 
-    // Get latest instagram post from Profil
+    // Compare to latest instagram post from Profile
     setInterval(async () => {
         let newPost = await igClient.getProfile("hybrid.calisthenics").then((result) => {
             return result.lastPosts[0];
