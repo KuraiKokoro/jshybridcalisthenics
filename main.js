@@ -185,6 +185,7 @@ const socialsEmbed = new Discord.MessageEmbed({
 
 const helpEmbed = new Discord.MessageEmbed({
     title: "Bot Commands",
+    footer: {text: "Bot created by AdrianH#5665"},
     fields:[
         {name: `${prefix}search`, value: "Search Hampton's Youtube Channel"},
         {name: `${prefix}socials`, value: "Display list of all of Hampton's Social Media"},
