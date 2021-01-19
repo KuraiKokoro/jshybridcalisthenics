@@ -184,6 +184,7 @@ const socialsEmbed = new Discord.MessageEmbed({
 }).setImage("https://images.squarespace-cdn.com/content/5deaeb267bc46246f5378ee8/1594320600428-CLI457D26L5F0ZP36SBO/hycal+black+logo+transparent+No+slogan.png?content-type=image%2Fpng");
 
 const helpEmbed = new Discord.MessageEmbed({
+    title: "Bot Commands"
     fields:[
         {name: `${prefix}search`, value: "Search Hampton's Youtube Channel"},
         {name: `${prefix}socials`, value: "Display list of all of Hampton's Social Media"},
