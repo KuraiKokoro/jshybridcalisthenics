@@ -108,7 +108,7 @@ client.on('message', async (msg) => {
         });
     }
     // set announcement channel
-    if ( command === "setann" ){
+    if ( command === "setann" && msg.member.guild.me.hasPermission('ADMINISTRATOR') ){
         nconf.set('announcementChannel', msg.channel.id);
     }
 
@@ -130,6 +130,10 @@ client.on('message', async (msg) => {
     if ( command === "socials" ) {
         msg.channel.send(socialsEmbed);
     } 
+
+    if ( command === "help" ){
+        msg.channel.send(helpEmbed);
+    }
 
 });
 
@@ -178,6 +182,14 @@ const socialsEmbed = new Discord.MessageEmbed({
     ]
 
 }).setImage("https://images.squarespace-cdn.com/content/5deaeb267bc46246f5378ee8/1594320600428-CLI457D26L5F0ZP36SBO/hycal+black+logo+transparent+No+slogan.png?content-type=image%2Fpng");
+
+const helpEmbed = new Discord.MessageEmbed({
+    fields:[
+        {name: "search", value: "Search Hampton's Youtube Channel"},
+        {name: "socials", value: "Display list of all of Hampton's Social Media"},
+        {name: "instagram", value: "Get the latest post from Hampton's instagram."}
+    ]
+})
 
 
 const searchEmbed = new Discord.MessageEmbed()
