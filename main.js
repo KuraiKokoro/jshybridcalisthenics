@@ -189,7 +189,7 @@ const helpEmbed = new Discord.MessageEmbed({
         {name: "socials", value: "Display list of all of Hampton's Social Media"},
         {name: "instagram", value: "Get the latest post from Hampton's instagram."}
     ]
-})
+});
 
 
 const searchEmbed = new Discord.MessageEmbed()
