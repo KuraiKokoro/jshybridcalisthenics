@@ -127,6 +127,10 @@ client.on('message', async (msg) => {
         
     }
 
+    if ( command === "socials" ) {
+        msg.channel.send(socialsEmbed);
+    } 
+
 });
 
 const IGnewPost = (post) => {
@@ -155,13 +159,31 @@ const ytSearch = async (query) => {
 };
 
 
+const socialsEmbed = new Discord.MessageEmbed({
+    color: "#7851A9",
+    title: "Hybrid Calisthenics Social Media",
+    footer: {text: "Bot created by AdrianH#5665"},
+    fields: [
+        {name: "Twitter", value:"[hcalisthenics](https://twitter.com/hcalisthenics)", inline:true},
+        {name: "Tiktok", value:"[hybridcalisthenics](https://www.tiktok.com/@hybridcalisthenics)", inline:true},
+        {name: "YouTube", value:"[Hybrid Calisthenics](https://www.youtube.com/channel/UCeJFgNahi--FKs0oJyeRDEw)", inline:true},
+        {name: "Facebook", value:"[HCalisthenics](https://www.facebook.com/HCalisthenics)", inline:true},
+        {name: "Twitch", value:"[Twitch](https://www.hybridcalisthenics.com/twitch)", inline:true},
+        {name: "Tumblr", value:"[hybridcalisthenics](https://www.hybridcalisthenics.com/tumblr)", inline:true},
+        {name: "Patreon", value:"[hybridcalisthenics](https://www.patreon.com/hybridcalisthenics)", inline:true},
+        {name: "OnlyFans (Family Friendly)", value:"[hybridcalisthenics](https://hybridcalisthenics.com/onlyfans)", inline:true},
+        {name: "R̵͍̠͑̽͛E̵̝͊́̇ͅD̸͖͑̕Ă̷̫͂C̵̙̗̅͊͒T̴̠̀͐E̴͈͝Ḑ̴̞̞̳̉", value:"[HybridCalisthenics](https://www.hybridcalisthenics.com/redacted)", inline:true},
+        {name: "Subreddit", value:'[Reddit](https://www.hybridcalisthenics.com/subreddit)', inline:true}
+
+    ]
+
+}).setImage("https://images.squarespace-cdn.com/content/5deaeb267bc46246f5378ee8/1594320600428-CLI457D26L5F0ZP36SBO/hycal+black+logo+transparent+No+slogan.png?content-type=image%2Fpng");
 
 
-
-let searchEmbed = new Discord.MessageEmbed()
+const searchEmbed = new Discord.MessageEmbed()
     .setColor("#7851A9")
     .setTitle("Searching...")
-    .setFooter('Bot created by AdrianH#5605');
+    .setFooter('Bot created by AdrianH#5665');
 
 
 (async () => {
