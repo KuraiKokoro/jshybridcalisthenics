@@ -150,8 +150,10 @@ client.on('message', async (msg) => {
             if (i == i % 2) {
                 const name = i/2;
                 const tags = tikTokVideos[i];
-                tikArr[i] = {name, tags};
-            } else { tikArr[i].video = tikTokVideos[i] + 1; }
+                tikArr[i] = {name: name, tags: tags};
+            } else { 
+                tikArr[i].video = tikTokVideos[i] + 1;
+            }
 
         }
         
