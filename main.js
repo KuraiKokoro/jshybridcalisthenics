@@ -194,7 +194,7 @@ const routineEmbed = new Discord.MessageEmbed({
 	url:"https://www.hybridcalisthenics.com/routine",
 	description: "If you have questions about fitness, make sure to check out this routine first.\n There's a lot of answers to your questions right here. ",
 	footer: {text: "Bot created by AdrianH#5665"}
-});
+}).setImage("https://images.squarespace-cdn.com/content/5deaeb267bc46246f5378ee8/1594320600428-CLI457D26L5F0ZP36SBO/hycal+black+logo+transparent+No+slogan.png?content-type=image%2Fpng");
 
 
 const socialsEmbed = new Discord.MessageEmbed({
