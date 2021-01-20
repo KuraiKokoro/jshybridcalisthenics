@@ -120,7 +120,7 @@ client.on('message', async (msg) => {
 					content: new Discord.MessageEmbed({
 					color: "#00FF00",
 					title: "Hybrid.Calisthenics",
-					description: `${profile.lastPosts[post].caption.substring(0, 150)}...`,
+					description: `${profile.lastPosts[post].caption.substring(0, 300)}...`,
 					url: `http://instagram.com/p/${profile.lastPosts[post].shortcode}`
 					}).setImage(profile.lastPosts[post].thumbnail),
 
