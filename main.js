@@ -140,6 +140,7 @@ client.on('message', async (msg) => {
     }
 
     if ( command === "tiktok" ){
+        // This should be moved and done into setInerval
         const query = args.join(" ");
         const $ = cheerio.load(hybridVideoIndex.body);
         const tikTokVideos = $("#block-yui_3_17_2_1_1598426259587_9640 p");
