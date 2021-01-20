@@ -135,15 +135,6 @@ client.on('message', async (msg) => {
 			}
 			let resultMenu = new Menu(msg.channel, msg.author.id, arrofEmbeds);
 			resultMenu.start();
-
-			
-				// igEmbed = new Discord.MessageEmbed({
-				// 	title: "Hybrid.Calisthenics",
-				// 	description: `${profile.lastPosts[0].caption.substring(0, 150)}...`,
-				// 	url: `http://instagram.com/p/${profile.lastPosts[0].shortcode}`
-				// }).setImage(profile.lastPosts[0].thumbnail);
-
-				// msg.channel.send(igEmbed);
 			}
 		).catch((err) => console.log(err));
 		
