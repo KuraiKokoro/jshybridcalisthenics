@@ -122,7 +122,7 @@ client.on('message', async (msg) => {
 					title: "Hybrid.Calisthenics",
 					description: `${profile.lastPosts[post].caption.substring(0, 300)}...`,
 					url: `http://instagram.com/p/${profile.lastPosts[post].shortcode}`,
-					footer: "Bot created by AdrianH#5665"
+					footer: {text: "Bot created by AdrianH#5665"}
 					}).setImage(profile.lastPosts[post].thumbnail),
 
 					reactions: {
@@ -149,6 +149,10 @@ client.on('message', async (msg) => {
 		msg.channel.send(helpEmbed);
 	}
 
+	if ( command === "routine"){
+		msg.channel.send(routineEmbed);
+	}
+
 	if ( command === "sephiroth" ){
 		msg.channel.send("https://youtu.be/-5sLN2h2_9E");
 	}
@@ -162,7 +166,9 @@ const IGnewPost = (post) => {
 	const newPostEmbed = new Discord.MessageEmbed({
 		title: "View post on Instagram",
 		description: post.caption,
-		url: `http://instagram.com/p/${post.shortcode}`
+		url: `http://instagram.com/p/${post.shortcode}`,
+		footer:{text:"Bot created by AdrianH#5655"}
+
 	}).setImage(post.thumbnail);
 
 	announcementChannel.send(newPostEmbed);
@@ -181,6 +187,14 @@ const ytSearch = async (query) => {
 	});
 	return x;
 };
+
+const routineEmbed = new Discord.MessageEmbed({
+	color:"#7851A9",
+	title:"Hybrid Calisthenics Routine",
+	url:"https://www.hybridcalisthenics.com/routine",
+	description: "If you have questions about fitness, make sure to check out this routine first.\n There's a lot of answers to your questions right here. ",
+	footer: {text: "Bot created by AdrianH#5665"}
+});
 
 
 const socialsEmbed = new Discord.MessageEmbed({
@@ -209,7 +223,8 @@ const helpEmbed = new Discord.MessageEmbed({
 	fields:[
 		{name: `${prefix}search <query>`, value: "Search Hampton's Youtube Channel"},
 		{name: `${prefix}socials`, value: "Display list of all of Hampton's Social Media"},
-		{name: `${prefix}instagram`, value: "Get the latest post from Hampton's instagram."}
+		{name: `${prefix}instagram`, value: "Get the latest post from Hampton's instagram."},
+		{name: `${prefix}routine`, value: "Get Hampton's routine!"}
 	]
 });
 
