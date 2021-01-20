@@ -206,9 +206,9 @@ const searchEmbed = new Discord.MessageEmbed()
 
 (async () => {
     console.log('Starting Bot...');
-    // igClient.authBySessionId(igToken)
-    //     .then(account => console.log(account))
-    //     .catch(err => console.log(err));
+    igClient.authBySessionId(igToken)
+        .then(account => console.log(account))
+        .catch(err => console.log(err));
     client.login(token).catch(err => {console.error(err);});
     
 }) ();
@@ -223,7 +223,3 @@ setInterval(async () => {
       });
   }, 1000);
 
-
-setInterval(async () => {
-    hybridVideoIndex = await dlHybridPage();
-}, 3600000);
