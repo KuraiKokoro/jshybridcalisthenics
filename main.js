@@ -122,7 +122,7 @@ client.on('message', async (msg) => {
 					title: "Hybrid.Calisthenics",
 					description: `${profile.lastPosts[post].caption.substring(0, 150)}...`,
 					url: `http://instagram.com/p/${profile.lastPosts[post].shortcode}`
-					}).setImage(post.thumbnail),
+					}).setImage(profile.lastPosts[post].thumbnail),
 
 					reactions: {
 						'⬅': 'previous',
