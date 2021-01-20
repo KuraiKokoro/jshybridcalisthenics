@@ -213,10 +213,11 @@ const helpEmbed = new Discord.MessageEmbed({
 });
 
 
-const searchEmbed = new Discord.MessageEmbed()
-	.setColor("#7851A9")
-	.setTitle("Searching...")
-	.setFooter('Bot created by AdrianH#5665');
+const searchEmbed = new Discord.MessageEmbed({
+	color: "#7851A9",
+	title: "Searching...",
+	footer: "Bot created by AdrianH#5665"
+})
 
 
 (async () => {
