@@ -122,7 +122,6 @@ client.on('message', async (msg) => {
 					title: "Hybrid.Calisthenics",
 					description: `${profile.lastPosts[post].caption.substring(0, 300)}...`,
 					url: `http://instagram.com/p/${profile.lastPosts[post].shortcode}`,
-
 					footer: "Bot created by AdrianH#5665"
 					}).setImage(profile.lastPosts[post].thumbnail),
 
