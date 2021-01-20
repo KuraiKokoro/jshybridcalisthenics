@@ -116,7 +116,7 @@ client.on('message', async (msg) => {
 				console.log(profile);
 				igEmbed = new Discord.MessageEmbed({
 					title: "Hybrid.Calisthenics",
-					description: profile.lastPosts[0].caption.substring(0, 150),
+					description: `${profile.lastPosts[0].caption.substring(0, 150)}...`,
 					url: `http://instagram.com/p/${profile.lastPosts[0].shortcode}`
 				}).setImage(profile.lastPosts[0].thumbnail);
 
