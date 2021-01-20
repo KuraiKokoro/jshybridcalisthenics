@@ -6,6 +6,8 @@ const {Menu} = require('discord.js-menu');
 const nconf = require('nconf');
 const ytsr = require('ytsr');
 const ig = require('scraper-instagram');
+const got = require('got');
+const cheerio = require('cheerio');
 // Load Token / Prefix from .env file
 token = process.env.token;
 prefix = process.env.prefix;
@@ -15,8 +17,8 @@ nconf.use('file', { file: './config.json'});
 nconf.load();
 
 const igClient = new ig();
-let latestPost;
-
+let latestIGPost;
+let hybridVideoIndex;
 
 
 
@@ -41,13 +43,11 @@ client.on('ready', async () => {
             lastIGPost = newPost;
             IGnewPost(newPost);
         }
-
-
-
-    }, 18000);
+    }, 1800000);
 });
 
 client.on('message', async (msg) => {
+
     if (!msg.content.startsWith(prefix) || msg.author.bot ) return;
 
     const args = msg.content.slice(prefix.length).trim().split(/ +/);
@@ -136,10 +136,27 @@ client.on('message', async (msg) => {
     }
 
     if ( command === "sephiroth" ){
-        msg.channel.send("https://youtu.be/-5sLN2h2_9E")
+        msg.channel.send("https://youtu.be/-5sLN2h2_9E");
     }
 
-});
+    if ( command === "tiktok" ){
+        const query = args.join(" ");
+        console.log(hybridVideoIndex.body);
+        const $ = cheerio.load(hybridVideoIndex.body);
+        const tikTokVideos = $("div.sqs-block-content").html();
+        console.log(tikTokVideos);
+
+}});
+
+const dlHybridPage = async () => {
+    try {
+        const response = await got('https://www.hybridcalisthenics.com/videos');
+        console.log(response);
+        return response;
+    } catch (err) {
+        console.error(err.response.body);
+    }
+};
 
 const IGnewPost = (post) => {
     announcementChannel = client.channels.cache.get(nconf.get('announcementChannel'));
@@ -206,14 +223,16 @@ const searchEmbed = new Discord.MessageEmbed()
 
 (async () => {
     console.log('Starting Bot...');
-    igClient.authBySessionId(igToken)
-        .then(account => console.log(account))
-        .catch(err => console.log(err));
-    client.login(token);
+    hybridVideoIndex = await dlHybridPage();
 
+    // igClient.authBySessionId(igToken)
+    //     .then(account => console.log(account))
+    //     .catch(err => console.log(err));
+    client.login(token).catch(err => {console.error(err);});
+    
 }) ();
 
-setInterval(() => {
+setInterval(async () => {
     console.log("Bot still running.");
     nconf.save(function (err) {
         if (err) {
@@ -222,3 +241,8 @@ setInterval(() => {
         }
       });
   }, 1000);
+
+
+setInterval(async () => {
+    hybridVideoIndex = await dlHybridPage();
+}, 3600000);
