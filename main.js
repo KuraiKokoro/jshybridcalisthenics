@@ -113,14 +113,37 @@ client.on('message', async (msg) => {
 
 	if ( command === "instagram" ){
 		igClient.getProfile("hybrid.calisthenics").then((profile) => {
-				console.log(profile);
-				igEmbed = new Discord.MessageEmbed({
+			let arrofEmbeds = [];	
+			for ( let post in profile.lastPosts ){
+				let msgEmbed = {
+					name: x,
+					content: new Discord.MessageEmbed({
+					color: "#00FF00",
 					title: "Hybrid.Calisthenics",
-					description: `${profile.lastPosts[0].caption.substring(0, 150)}...`,
-					url: `http://instagram.com/p/${profile.lastPosts[0].shortcode}`
-				}).setImage(profile.lastPosts[0].thumbnail);
+					description: `${post.caption.substring(0, 150)}...`,
+					url: `http://instagram.com/p/${post.shortcode}`
+					}).setImage(post.thumbnail),
 
-				msg.channel.send(igEmbed);
+					reactions: {
+						'⬅': 'previous',
+						'➡': 'next',
+						'⛔': 'stop',
+						'1️⃣': 'first'
+					}
+				};
+				arrofEmbeds.push(msgEmbed);
+			}
+			let resultMenu = new Menu(msg.channel, msg.author.id, arrofEmbeds);
+			resultMenu.start();
+
+			
+				// igEmbed = new Discord.MessageEmbed({
+				// 	title: "Hybrid.Calisthenics",
+				// 	description: `${profile.lastPosts[0].caption.substring(0, 150)}...`,
+				// 	url: `http://instagram.com/p/${profile.lastPosts[0].shortcode}`
+				// }).setImage(profile.lastPosts[0].thumbnail);
+
+				// msg.channel.send(igEmbed);
 			}
 		).catch((err) => console.log(err));
 		
