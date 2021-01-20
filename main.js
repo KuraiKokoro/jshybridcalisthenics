@@ -116,12 +116,12 @@ client.on('message', async (msg) => {
 			let arrofEmbeds = [];	
 			for ( let post in profile.lastPosts ){
 				let msgEmbed = {
-					name: x,
+					name: post,
 					content: new Discord.MessageEmbed({
 					color: "#00FF00",
 					title: "Hybrid.Calisthenics",
-					description: `${post.caption.substring(0, 150)}...`,
-					url: `http://instagram.com/p/${post.shortcode}`
+					description: `${profile.lastPosts[post].caption.substring(0, 150)}...`,
+					url: `http://instagram.com/p/${profile.lastPosts[post].shortcode}`
 					}).setImage(post.thumbnail),
 
 					reactions: {
