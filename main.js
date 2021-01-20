@@ -6,8 +6,6 @@ const {Menu} = require('discord.js-menu');
 const nconf = require('nconf');
 const ytsr = require('ytsr');
 const ig = require('scraper-instagram');
-const got = require('got');
-const cheerio = require('cheerio');
 // Load Token / Prefix from .env file
 token = process.env.token;
 prefix = process.env.prefix;
@@ -139,27 +137,8 @@ client.on('message', async (msg) => {
         msg.channel.send("https://youtu.be/-5sLN2h2_9E");
     }
 
-    if ( command === "tiktok" ){
-        // This should be moved and done into setInerval
-        const query = args.join(" ");
-        const $ = cheerio.load(hybridVideoIndex.body);
-        const tikTokVideos = $("#block-yui_3_17_2_1_1598426259587_9640 p").text();
-        console.log(tikTokVideos);
-        let tikArr = []; 
-        for (let i in tikTokVideos.length){
-            if (i == i % 2) {
-                const name = i/2;
-                const tags = tikTokVideos[i];
-                tikArr.push({name: name, tags: tags});
-            } else { 
-                tikArr[i].video = tikTokVideos[i] + 1;
-            }
 
-        }
-        
-        console.log(tikArr);
-
-}});
+});
 
 const dlHybridPage = async () => {
     try {
