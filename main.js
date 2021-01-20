@@ -37,6 +37,7 @@ client.on('ready', async () => {
         let newPost = await igClient.getProfile("hybrid.calisthenics").then((result) => {
             return result.lastPosts[0];
         });
+        // If new post, update lastIGPost, and send new image to be posted in announcements channel.
         if (newPost.shortcode != lastIGPost.shortcode){
             lastIGPost = newPost;
             IGnewPost(newPost);
@@ -115,7 +116,7 @@ client.on('message', async (msg) => {
                 console.log(profile);
                 igEmbed = new Discord.MessageEmbed({
                     title: "Hybrid.Calisthenics",
-                    description: profile.lastPosts[0].caption,
+                    description: profile.lastPosts[0].caption[0-150],
                     url: `http://instagram.com/p/${profile.lastPosts[0].shortcode}`
                 }).setImage(profile.lastPosts[0].thumbnail);
 
