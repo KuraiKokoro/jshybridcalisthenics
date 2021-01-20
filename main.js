@@ -140,15 +140,6 @@ client.on('message', async (msg) => {
 
 });
 
-const dlHybridPage = async () => {
-    try {
-        const response = await got('https://www.hybridcalisthenics.com/videos');
-        console.log(response);
-        return response;
-    } catch (err) {
-        console.error(err.response.body);
-    }
-};
 
 const IGnewPost = (post) => {
     announcementChannel = client.channels.cache.get(nconf.get('announcementChannel'));
@@ -215,8 +206,6 @@ const searchEmbed = new Discord.MessageEmbed()
 
 (async () => {
     console.log('Starting Bot...');
-    hybridVideoIndex = await dlHybridPage();
-
     // igClient.authBySessionId(igToken)
     //     .then(account => console.log(account))
     //     .catch(err => console.log(err));
