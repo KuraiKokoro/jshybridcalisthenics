@@ -219,7 +219,7 @@ const searchEmbed = new Discord.MessageEmbed({
 	color: "#7851A9",
 	title: "Searching...",
 	footer: "Bot created by AdrianH#5665"
-})
+});
 
 
 (async () => {
