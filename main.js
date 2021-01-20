@@ -141,7 +141,6 @@ client.on('message', async (msg) => {
 
     if ( command === "tiktok" ){
         const query = args.join(" ");
-        console.log(hybridVideoIndex.body);
         const $ = cheerio.load(hybridVideoIndex.body);
         const tikTokVideos = $("div.sqs-block-content").html();
         console.log(tikTokVideos);
