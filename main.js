@@ -145,7 +145,17 @@ client.on('message', async (msg) => {
         const $ = cheerio.load(hybridVideoIndex.body);
         const tikTokVideos = $("#block-yui_3_17_2_1_1598426259587_9640 p").text();
         
-        console.log(tikTokVideos);
+        let tikArr = []; 
+        for (let i in tikTokVideos.length){
+            if (i == i % 2) {
+                const name = i/2;
+                const tags = tikTokVideos[i];
+                tikArr[i] = {name, tags};
+            } else { tikArr[i].video = tikTokVideos[i] + 1; }
+
+        }
+        
+        console.log(tikArr);
 
 }});
 
